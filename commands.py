@@ -25,18 +25,33 @@ def add_contact(contacts):
     contacts.append({'first_name': first_name, "last_name": last_name, "mobile": mobile_num, "home": home_num, "email": email, "address": address})
     write_contacts(CONTACT_FILE_PATH, contacts)
 
-def search_for_contact(contacts):
+def search_for_contact(contacts):    
     pass
 
 def delete_contact(contacts):
-    pass
+    first_name = input("First Name: ")
+    last_name = input("Last Name: ")
+    for contact in contacts:
+        if first_name == contact["first_name"] and last_name == contact["last_name"]:
+            confirm_del = input("Are you sure you would like to delete this contact (y/n)? ")
+            if confirm_del == "y":
+                contacts.remove(contact)
+                print("Contact deleted!")
+            else:
+                return
+        else:
+            print("No contact with this name exists")
+            return
 
 
 def list_contacts(contacts):   
-    for idx, contact in enumerate(contacts):
-        idx += 1
-        first_name = contact["first_name"]
-        last_name = contact["last_name"]
-        mobile = contact["mobile"]
-        email = contact["email"]
-        print(f"{idx}. {first_name} {last_name}\n\tMobile: {mobile}\n\tEmail: {email}")
+    if not contacts:
+        print("There is no saved contacts")
+    else:
+        for idx, contact in enumerate(contacts):
+            idx += 1
+            first_name = contact["first_name"]
+            last_name = contact["last_name"]
+            mobile = contact["mobile"]
+            email = contact["email"]
+            print(f"{idx}. {first_name} {last_name}\n\tMobile: {mobile}\n\tEmail: {email}")
