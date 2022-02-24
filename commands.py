@@ -1,11 +1,13 @@
+from support_functions import verify_email_address, verify_phone_number, read_contacts, write_contacts
 ERROR_MESSAGE = "You entered invalid information, this contact was not added."
+CONTACT_FILE_PATH = "contacts.json"
 
 def add_contact(contacts):
     first_name = input("First Name: ")
     last_name = input("Last Name: ")
     if contacts:
         for contact in contacts:
-            if contact['first_name'] == first_name or contact['last_name'] == last_name:
+            if contact['first_name'] == first_name and contact['last_name'] == last_name:
                 print("A contact with this name already exists.")
                 print(ERROR_MESSAGE)
                 return 
@@ -26,7 +28,32 @@ def add_contact(contacts):
     write_contacts(CONTACT_FILE_PATH, contacts)
 
 def search_for_contact(contacts):    
-    pass
+    first_name = input("First Name: ")
+    last_name = input("Last Name: ")
+    matches = []
+    for contact in contacts:
+        if first_name in contact["first_name"].lower() or not first_name and last_name in contact["last_name"].lower() or not last_name:
+            matches.append(contact)
+            print(matches)
+    print(f"Found {len(matches)} matching contacts")            
+    for idx, match in enumerate(matches):
+            idx += 1
+            first_name = contact["first_name"]
+            last_name = contact["last_name"]
+            mobile = contact["mobile"]
+            email = contact["email"]
+            address = contact["address"]
+            print(f"{idx}. {first_name} {last_name}\n\t")
+            if mobile:
+                print(f"\tMobile: {mobile}")
+            
+            if email:
+                print(f"\tEmail: {email}")
+            
+            if address:
+                print(f"\tAddress: {address}.")
+
+
 
 def delete_contact(contacts):
     first_name = input("First Name: ")
