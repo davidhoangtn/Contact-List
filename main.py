@@ -1,7 +1,8 @@
 import json
 import sys
-
+from commands import add_contact, search_for_contact, delete_contact, list_contacts
 from sympy import continued_fraction_convergents
+
 
 def read_contacts(file_path):
     try:
@@ -16,7 +17,6 @@ def write_contacts(file_path, contacts):
     with open(file_path, 'w') as f:
         contacts = {"contacts": contacts}
         json.dump(contacts, f)
-
 
 def verify_email_address(email):
     if "@" not in email:
@@ -46,45 +46,6 @@ def verify_phone_number(phone_number):
         return True
     else: 
         return False
-
-
-def add_contact(contacts):
-    first_name = input("First Name: ")
-    last_name = input("Last Name: ")
-    if contacts:
-        for contact in contacts:
-            if contact['first name'] == first_name or contact['last_name'] == last_name:
-                print("A contact with this name already exists.")
-                print(ERROR_MESSAGE)
-                return 
-    mobile_num = input("Mobile Phone Number: ")
-    if not verify_phone_number(mobile_num):
-        print("Invalid mobile phone number.")
-        print(ERROR_MESSAGE)
-        return 
-    home_num = input("Home Phone Number: ")
-    email = input("Email Address: ")
-    if not verify_email_address(email):
-        print("Invalid email address.")
-        print(ERROR_MESSAGE)
-        return 
-    address = input("Address: ")
-    print("Contact Added!")
-    contacts.append({'first_name': first_name, "last_name": last_name, "mobile": mobile_num, "home": home_num, "email": email, "address": address})
-    write_contacts(CONTACT_FILE_PATH, contacts)
-
-def search_for_contact(contacts):
-    pass
-
-
-def delete_contact(contacts):
-    pass
-
-
-def list_contacts(contacts):
-    
-    pass
-
 
 CONTACT_FILE_PATH = "contacts.json"
 WELCOME_MESSAGE = """Welcome to your contact list!\nThe following is a list of useable commands:\n"add": Adds a contact.\n"delete": Deletes a contact.\n"list": Lists all contacts.\n"search": Searches for a contact by name.\n"q": Quits the program and saves the contact list."""
