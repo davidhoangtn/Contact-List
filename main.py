@@ -1,13 +1,11 @@
 import json
 import sys
 from commands import add_contact, search_for_contact, delete_contact, list_contacts
-from sympy import continued_fraction_convergents
 from support_functions import read_contacts
 
 CONTACT_FILE_PATH = "contacts.json"
 WELCOME_MESSAGE = """Welcome to your contact list!\nThe following is a list of useable commands:\n"add": Adds a contact.\n"delete": Deletes a contact.\n"list": Lists all contacts.\n"search": Searches for a contact by name.\n"q": Quits the program and saves the contact list."""
 CONTACTS = read_contacts(CONTACT_FILE_PATH)
-ERROR_MESSAGE = "You entered invalid information, this contact was not added."
 
 def main(contacts_path):
     print(WELCOME_MESSAGE)
